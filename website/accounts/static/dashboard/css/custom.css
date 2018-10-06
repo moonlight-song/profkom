@@ -1,0 +1,15 @@
+.add-claim a {
+	color : white;
+}
+
+.table-claims {
+	font-size : 140%;
+}
+
+@media (max-width: 991px) {
+
+.main-content {
+    padding-top: 50PX;
+}
+
+}

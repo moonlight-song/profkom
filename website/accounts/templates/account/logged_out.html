@@ -1,0 +1,9 @@
+{% extends "account/service_page.html" %}
+
+{% block service_page_content %}
+    
+	<h2 class="pb-2 mb-4">Вы вышли из личного кабинета</h2>
+	<a href="{% url 'pages-root' %}" class="btn-block au-btn au-btn--block au-btn--green m-b-20">Снова войти в личный кабинет</a>
+	<a href="{% url 'accounts:login' %}" class="btn-block au-btn au-btn--block au-btn--blue m-b-20">Перейти на сайт</a>
+
+{% endblock %}

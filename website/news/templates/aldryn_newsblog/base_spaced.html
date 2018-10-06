@@ -1,0 +1,15 @@
+{% extends CMS_TEMPLATE %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="section">
+	    <!-- CONTAINER -->
+	    <div class="container">
+	        <!-- ROW -->
+	        <div class="row">
+				{% block newsblog_content %}
+				{% endblock %}						
+			</div>
+		</div>
+	</div>
+{% endblock content %}

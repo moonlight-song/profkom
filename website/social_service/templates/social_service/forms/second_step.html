@@ -1,0 +1,82 @@
+{% extends "account/dashboard.html" %}
+
+{% block dashboard_title %}Подача заявки на материальную помощь{% endblock %}
+
+{% block dashboard_content %}
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Оформление заявки на помощь</strong> Второй шаг
+            </div>
+            <div class="card-body card-block">
+                <form action="{{ request.path }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="row form-group">
+                        <div class="col col-md-4">
+                            <label for="select" class=" form-control-label">Выберите период подачи заявки</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            {{ form.period }}
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-4">
+                            <label for="select" class=" form-control-label">Выберите документы, которые хотите приложить к заявлению (ctrl для мультивыбора)</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            {{ form.documents }}
+                        </div>
+                    </div>
+
+                    {% if form_checkboxes %}
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">Выберите причины для получения помощи</label>
+                            </div>
+                            <div class="col col-md-8">
+                                <div class="form-check">
+                                {% for field in form_checkboxes %}
+                                    <div class="checkbox">
+                                        <label for="{{ field.widget.id_for_label }}" class="form-check-label">
+                                            {{ field }}{{ field.label }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if form.additional_information %}
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">При выборе варианта "тяжелое материальное положение" необходимо дать дополнительную информацию (низкая зп родителей, нехватка средств по другим причинам и проч.)</label>
+                            </div>
+                            <div class="col col-md-8">
+                                {{ form.additional_information }}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if form.canteen_preference %}
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label for="select" class=" form-control-label">Какая столовая для Вас предпочтительна?</label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                {{ form.canteen_preference }}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-dot-circle-o"></i> Подать заявку
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

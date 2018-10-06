@@ -1,0 +1,27 @@
+from cms.models import Page
+from cms.api import add_plugin
+
+pages = Page.objects.filter(languages = 'ru', ####publisher_is_draft = False)
+for rpage in pages :
+	if rpage.get_slug ('ru') == 'vtoraya-stranica' : print (rpage.id)
+
+placeholders = page.placeholders.get(slot = 'content')
+
+Text : 
+add_plugin(placeholders, 'TextPlugin', 'ru', body='Test text plugin content')
+plugins = placeholders.get_plugins()
+text_plugin = plugins.get(plugin_type = 'TextPlugin')
+text = text_plug.djangocms_text_ckeditor_text
+text.body
+text_plugins = plugins.filter(plugin_type = 'TextPlugin')
+text_plugins.delete()
+
+Pic : 
+picture
+from filer.management.commands.import_files import FileImporter
+importer = FileImporter()
+folder = FileImporter.get_or_create_folder(importer, ['base', 'subfolder'])
+file_obj = DjangoFile(open(r'/home/ivasio/Изображения/NLnptf_Hwt8.jpg', mode='rb'), name='first_pic.jpg')
+file = importer.import_file(file_obj, folder)
+file.save()
+add_plugin(placeholders, 'PicturePlugin', 'ru', picture = file)

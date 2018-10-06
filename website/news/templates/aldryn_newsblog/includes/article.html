@@ -1,0 +1,49 @@
+{% load i18n staticfiles thumbnail cms_tags apphooks_config_tags %}
+
+<div class="col-md-8">
+	<ul class="article-breadcrumb">
+        <li><a href="{% namespace_url "article-list" %}">{% trans "Back to Overview" %}</a></li>
+    </ul>
+
+	<article class="article article-post
+	{% if article.is_featured %} featured{% endif %}
+	{% if not article.published %} unpublished{% endif %}">
+	
+		<div class="article-main-img">
+			<img src="{% thumbnail article.featured_image 800x450 crop subject_location=article.featured_image.subject_location %}" alt="{{ article.featured_image.alt }}">
+		</div>
+
+		<div class="article-body">
+			
+			<h1 class="article-title">{% render_model article "title" %}</h1>
+			
+			{% if article.categories.exists %}
+				<ul class="article-info">
+			    {% for category in article.categories.all %}
+					<li class="article-category"><a href="{% namespace_url 'article-list-by-category' category.slug namespace=namespace default='' %}">{{ category.name }}</a></li>
+			    {% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if article.tags %}
+				<ul class="article-info">
+			    {% for tag in article.tags.all %}
+					<li class="article-category"><a href="{% namespace_url 'article-list-by-tag' tag=tag.slug namespace=namespace default='' %}">{{ tag.name }}</a></li>
+			    {% endfor %}
+				</ul>
+			{% endif %}
+
+
+			<ul class="article-meta">
+				<li><i class="fa fa-clock-o"></i>{{ article.publishing_date|date }}</li>
+				<li><i class="fa fa-user-circle"></i>{% include "aldryn_newsblog/includes/author.html" with author=article.author %}</li>
+			</ul>
+
+
+			{# {% render_model article "lead_in" %} #}
+
+			{% render_placeholder article.content language placeholder_language %}
+
+		</div>
+	</article>
+</div>

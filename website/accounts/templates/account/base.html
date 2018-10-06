@@ -1,0 +1,66 @@
+{% extends CMS_TEMPLATE %}
+{% load i18n staticfiles sekizai_tags %}
+
+{% block header %}{% endblock %}
+
+{% block additional_static_files %}
+    {{ block.super }}
+    {% addtoblock "css" %}
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'dashboard/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'dashboard/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+        <!-- Vendor CSS-->
+        <link href="{% static 'dashboard/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'dashboard/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+        <!-- Dashboard stylesheet -->
+        <link type="text/css" href="{% static 'dashboard/css/theme.css' %}" rel="stylesheet"  media="all">
+    {% endaddtoblock %}
+
+    {{ block.super }}
+    {% addtoblock "js" %}
+        <script src="{% static 'dashboard/vendor/jquery-3.2.1.min.js' %}"></script>
+        <!-- Bootstrap JS-->
+        <script src="{% static 'dashboard/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+        <script src="{% static 'dashboard/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+        <!-- Vendor JS       -->
+        <script src="{% static 'dashboard/vendor/slick/slick.min.js' %}">
+        </script>
+        <script src="{% static 'dashboard/vendor/wow/wow.min.js' %}"></script>
+        <script src="{% static 'dashboard/vendor/animsition/animsition.min.js' %}"></script>
+        <script src="{% static 'dashboard/vendor/bootstrap-progressbar/bootstrap-progressba' %}r.min.js">
+        </script>
+        <script src="{% static 'dashboard/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'dashboard/vendor/counter-up/jquery.counteru' %}p.min.js">
+        </script>
+        <script src="{% static 'dashboard/vendor/circle-progress/circle-progress.min.js' %}"></script>
+        <script src="{% static 'dashboard/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+        <script src="{% static 'dashboard/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+        <script src="{% static 'dashboard/vendor/select2/select' %}2.min.js"></script>
+
+        <!-- Main JS-->
+        <script src="{% static 'dashboard/js/main.js' %}"></script>
+
+        <!-- Custom JS-->
+        <script src="{% static 'dashboard/js/custom.js' %}"></script>
+
+
+    {% endaddtoblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="page-wrapper">
+       {% block template_content %}{% endblock %}
+    </div>
+{% endblock content %}

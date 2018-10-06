@@ -1,0 +1,32 @@
+{% extends "account/dashboard.html" %}
+
+{% block dashboard_title %}Подача заявки на материальную помощь{% endblock %}
+
+{% block dashboard_content %}
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Оформление заявки на помощь</strong> Первый шаг
+            </div>
+            <div class="card-body card-block">
+                <form id = "first-step-form" action="{{ request.path }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+			    	{% csrf_token %}
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="select" class=" form-control-label">Выберите тип заявки</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                        	{{ form.application_type }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-sm" form="first-step-form">
+                    <i class="fa fa-dot-circle-o"></i> Следующий шаг
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

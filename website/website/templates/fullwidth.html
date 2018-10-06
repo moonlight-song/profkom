@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags menu_tags staticfiles i18n %}
+
+{% block title %}{% page_attribute "page_title" %}{% endblock title %}
+
+
+{% block header %}
+	<header id="header">
+				
+		<!-- Center Header -->
+		<!--
+		<div id="center-header">
+			<div class="container">
+				<div class="header-logo">
+					<a href="#" class="logo"><img src="./img/logo.png" alt=""></a>
+				</div>
+				<div class="header-ads">
+					<img class="center-block" src="./img/ad-2.jpg" alt=""> 
+				</div>
+			</div>
+		</div>
+		-->
+		<!-- /Center Header -->
+		
+		<!-- Nav Header -->
+		<div id="nav-header">
+			<div class="container">
+				<nav id="main-nav">
+					<div class="nav-logo">
+						<a href="#" class="logo"><img src="./img/logo-alt.png" alt=""></a>
+					</div>
+					<ul class="main-nav nav navbar-nav">
+		                {% show_menu 0 100 100 100 %}
+		            </ul>
+				</nav>
+				
+				<div class="button-nav">
+					<button class="login-btn">
+					    {% if user.is_authenticated %}
+				            <a href="{% url 'accounts:logout' %}">
+				                {% trans 'Log out' %} {% firstof user.get_short_name user.get_username %}
+				            </a>
+					    {% else %}
+				            <a href="{% url 'accounts:login' %}">
+				                {% trans 'Log in' %} {% firstof user.get_short_name user.get_username %}
+				            </a>
+					    {% endif %}
+
+					</button>
+					<button class="search-collapse-btn"><i class="fa fa-search"></i></button>
+					<button class="nav-collapse-btn"><i class="fa fa-bars"></i></button>
+				</div>
+			</div>
+		</div>
+		<!-- /Nav Header -->
+	</header>
+{% endblock header %}
+
+{% block content %}
+	<div class="section">
+		<div class="container">
+			{% placeholder "content" %}
+		</div>
+	</div>
+{% endblock content %}

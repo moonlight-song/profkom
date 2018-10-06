@@ -1,0 +1,34 @@
+{% extends "account/dashboard.html" %}
+
+{% block dashboard_title %}Ваш профиль{% endblock %}
+
+{% block dashboard_content %}
+    <div class="col-lg-6 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <strong>Редактирование профиля</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="{{ request.path }}" method="post" enctype="multipart/form-data" class="form-horizontal" id="profile-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                {{ field.label_tag }}
+                            </div>
+                            <div class="col col-md-8">
+                                {{ field }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-sm" form="profile-form">
+                    <i class="fa fa-dot-circle-o"></i> Готово
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
