@@ -1,0 +1,17 @@
+{% load i18n staticfiles thumbnail cms_tags apphooks_config_tags %}
+
+<div class="col-sm-6 col-md-12">
+    <article class="article widget-article">
+        <div class="article-img">
+            <a href="/news/{{ article.slug }}">
+                <img src="{% thumbnail article.featured_image 80x45 crop subject_location=article.featured_image.subject_location %}" alt="{{ article.featured_image.alt }}">
+            </a>
+        </div>
+        <div class="article-body">
+            <h4 class="article-title"><a href="/news/{{ article.slug }}">{% render_model article "title" %}</a></h4>
+            <ul class="article-meta">
+                <li><i class="fa fa-clock-o"></i>{{ article.publishing_date|date }}</li>
+            </ul>
+        </div>
+    </article>
+</div>

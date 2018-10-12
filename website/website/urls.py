@@ -10,7 +10,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
 
-#from news.views import IndexView
+from news.views import IndexView
 
 
 admin.autodiscover()
@@ -22,8 +22,8 @@ urlpatterns = [
 
 #urlpatterns += i18n_patterns(
 urlpatterns += (
-	#url(r'^$', IndexView.as_view(), name='pages-root'), # Overrides '^$' from cms.urls
-	#url(r'^news/$', IndexView.as_view(), name='pages-root'), # Overrides '^$' from cms.urls
+	url(r'^$', IndexView.as_view(), name='pages-root'), # Overrides '^$' from cms.urls
+	url(r'^news/$', IndexView.as_view(), name='pages-root'), # Overrides '^$' from cms.urls
 
     url(r'^admin/', include(admin.site.urls)),  
     url(r'^', include('cms.urls')),

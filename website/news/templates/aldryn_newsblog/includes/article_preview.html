@@ -1,11 +1,16 @@
 {% load i18n staticfiles thumbnail cms_tags apphooks_config_tags %}
 
 
-<div class="col-md-6 article-preview">
+<div class="col-sm-6 article-preview">
     <!-- section title -->
-    <div class="section-title">
-        <h2 class="title">News</h2>
-    </div>
+    {% for category in article.categories.all %}
+        {% if forloop.first %}
+            <div class="section-title">
+                <h2 class="title">{{ category.name }}</h2>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </ul>
     <!-- /section title -->
     
     <!-- ARTICLE -->
@@ -15,14 +20,15 @@
 
         {% if article.featured_image_id %}
            <div class="article-img">
-                <a href="{% namespace_url 'article-detail' article.slug namespace=namespace default='' %}">
-                    <img src="{% thumbnail article.featured_image 800x450 crop subject_location=article.featured_image.subject_location %}" alt="{{ article.featured_image.alt }}">
+                <a href="/news/{{ article.slug }}">
+                    <img src="{% thumbnail article.featured_image 360x200 crop subject_location=article.featured_image.subject_location %}" alt="{{ article.featured_image.alt }}">
                 </a>
             </div>
         {% endif %}
 
         <div class="article-body">
-            <h3 class="article-title"><a href="{% namespace_url 'article-detail' article.slug namespace=namespace default='' %}">{% render_model article "title" %}</a></h3>
+            <h3 class="article-title"><a href="/news/{{ article.slug }}">{% render_model article "title" %}</a></h3>
+            <!--<h3 class="article-title"><a href="{# namespace_url 'article-detail' article.slug namespace=namespace default='' #}">{# render_model article "title" #}</a></h3> -->
 
             <ul class="article-meta">
                 <li><i class="fa fa-clock-o"></i>{{ article.publishing_date|date }}</li>

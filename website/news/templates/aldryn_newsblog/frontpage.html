@@ -1,0 +1,83 @@
+{% extends "aldryn_newsblog/base.html" %}
+{% load i18n %}
+
+{% block newsblog_content %}
+
+<!-- Owl Carousel 1 -->
+<div id="owl-carousel-1" class="owl-carousel owl-theme center-owl-nav">
+    {% for article in slider_articles %}
+        {% include "aldryn_newsblog/includes/article_carousel.html" %}
+    {% endfor %}
+</div>
+<!-- /Owl Carousel 1 -->
+
+<div class="section">
+    <!-- CONTAINER -->
+    <div class="container">
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-md-8">
+                {% for article in article_list %}
+                    {% cycle "True" "False" as odd silent %}
+                        {% if odd == 'True' %}
+                            <div class="row">
+                        {% endif  %}
+
+                        {% include "aldryn_newsblog/includes/article_preview.html" %}
+
+                        {% if odd == 'False'%}
+                            </div>
+                        {% endif  %}
+                {% empty %}
+                    <p>{% trans "No items available" %}</p>
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <!-- subscribe widget -->
+                <!--
+                <div class="widget subscribe-widget">
+                    <div class="widget-title">
+                        <h2 class="title">Subscribe to Newslatter</h2>
+                    </div>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="input-btn">Subscribe</button>
+                    </form>
+                </div>
+                -->
+                <!-- /subscribe widget -->
+                
+                <!-- article widget -->
+                {% if featured_articles %}
+                    <div class="widget">
+                        <div class="section-title">
+                            <h2 class="title">Важные статьи</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for article in featured_articles %}
+                            {% include "aldryn_newsblog/includes/article_sidebar.html" %}
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+
+                <!-- social widget -->
+                <div class="widget social-widget">
+                    <div class="section-title">
+                        <h2 class="title">Мы в социальных сетях</h2>
+                    </div>
+                    <ul>
+                        <li><a href="https://vk.com/profkom_phystech" class="vkontakte"><i class="fa fa-vk"></i><br><span>Вконтакте</span></a></li>
+                        <li><a href="https://www.instagram.com/mipt_profkom/" class="instagram"><i class="fa fa-instagram"></i><br><span>Instagram</span></a></li>
+                        <li><a href="https://twitter.com/ProfkomMIPT" class="twitter"><i class="fa fa-twitter"></i><br><span>Twitter</span></a></li>
+                    </ul>
+                </div>
+                <!-- /social widget -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "aldryn_newsblog/includes/pagination.html" %}
+{% endblock %}
