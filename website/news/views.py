@@ -10,40 +10,39 @@ from django.contrib.auth.models import User
 from django.core.files import File as DjangoFile
 from django.views import View
 from django.template.response import TemplateResponse
+from django.utils import translation
 
 from aldryn_people.models import Person
 from django.utils.safestring import SafeText
 from aldryn_newsblog.models import Article
 from aldryn_newsblog.cms_appconfig import NewsBlogConfig
+from aldryn_newsblog.views import ArticleListBase
 from aldryn_categories.models import Category
 from filer.management.commands.import_files import FileImporter
 from cms.api import add_plugin
 from cms.models.placeholdermodel import Placeholder
-#from cms.views import details_unrendered
-from cms.cache.page import set_page_cache
-from cms.utils.page_permissions import user_can_change_page, user_can_view_page
+from cms.apphook_pool import apphook_pool
 
-'''
-class IndexView (View) :
+class IndexView (ArticleListBase) :
 
-	def get(self, request, *args, **kwargs):
-		print ("it's me")
-		page, structure_requested, current_language = details_unrendered (request, 'news')
+	show_header = True
+	template_name = "aldryn_newsblog/frontpage.html"
 
-		context = {}
-		context['lang'] = current_language
-		context['current_page'] = page
-		context['has_change_permissions'] = user_can_change_page(request.user, page)
-		context['has_view_permissions'] = user_can_view_page(request.user, page)
 
-		if not context['has_view_permissions']:
-			return _handle_no_page(request)
+	def get_queryset(self):
+		
+		return Article.objects.language('ru').all()[2:]
 
-		response = TemplateResponse(request, 'aldryn_newsblog/article_list.html', context)
-		response.add_post_render_callback(set_page_cache)
 
-		return response
-'''
+	def get_context_data(self, **kwargs):
+		context = super(IndexView, self).get_context_data(**kwargs)
+		context['pagination'] = self.get_pagination_options()
+		context['slider_articles'] = Article.objects.language('ru').all()[0:2]
+		context['featured_articles'] = Article.objects.language('ru').filter(is_featured = True) \
+			.order_by('-publishing_date')[:4]
+		context['row_markers'] = [Article.objects.language('ru').filter(is_featured = True)[:4]]
+		return context
+	
 
 VK_URL_TEMPLATE = "https://api.vk.com/method/{method_name}?{parameters}&access_token={access_token}&v={api_version}"
 
@@ -158,5 +157,42 @@ def importVkPost (post):
 	add_plugin(placeholder, 'TextPlugin', 'ru', body = post['text'])
 
 	return article
+
+#происшествия@profkom_phystech
+
+def convert_hashtag_to_category (article):
+
+	if len(article.categories.all()) > 0 : return
+
+	plugin = article.content.get_plugins().filter(plugin_type='TextPlugin')[0]
+	text = plugin.get_plugin_instance()[0]
+	index_at = text.body.find('@profkom_phystech')
+
+	if (index_at == -1 ) : 
+		print ('Article {} : hashtag not found'.format(article))
+		return
+
+	index_sharp = text.body[:index_at].rfind('#')	
+	category_name = text.body[index_sharp+1 : index_at].capitalize()
+	text.body = text.body[:index_sharp]
+	text.save()
+
+	translation.activate('ru')
+
+	root = Category.objects.all()[0].get_root()
+	candidate_categories = [[item.name, item.id] for item in root.get_children() 
+		if category_name in item.name] 
+
+	if len(candidate_categories) > 0 :
+		category = Category.objects.get(id = candidate_categories[0][1])
+	else :
+		category = root.add_child(name = category_name)
+
+	article.categories.add(category)
+	article.save()
+
+
+
+
 
 

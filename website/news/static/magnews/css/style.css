@@ -788,9 +788,9 @@ textarea.input {
 	margin-right:-4px;
 }
 
-.social-widget ul li a.facebook {
+.social-widget ul li a.vkontakte {
 	color:#FFF !important;
-	background-color:#3b5999;
+	background-color:#4a76a8;
 }
 
 .social-widget ul li a.twitter {
@@ -1369,7 +1369,3 @@ textarea.input {
 
 
 /* CUSTOM */
-
-div.article-preview {
-    height: 585px;
-}

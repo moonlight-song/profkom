@@ -1,37 +1,6 @@
 {% extends CMS_TEMPLATE %}
 {% load staticfiles sekizai_tags%}
 
-
-{% block main_static_files %}
-	{{ block.super }}
-	{% addtoblock "css" %}
-		<!-- Google font -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7CLato:300,400" rel="stylesheet"> 
-		
-
-		<!-- Owl Carousel -->
-		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/owl.carousel.css' %}" />
-		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/owl.theme.default.css' %}" />
-		
-		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="{% static 'magnews/css/font-awesome.min.css' %}" />
-
-		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/bootstrap.min.css' %}" />		
-		
-		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/style.css' %}" />
-	{% endaddtoblock %}
-
-	{{ block.super }}
-	{% addtoblock "js" %}
-		<script src="{% static 'magnews/js/jquery.min.js' %}"></script>
-		<script src="{% static 'magnews/js/bootstrap.min.js' %}"></script>
-		<script src="{% static 'magnews/js/owl.carousel.min.js' %}"></script>
-		<script src="{% static 'magnews/js/main.js' %}"></script>
-	{% endaddtoblock %}	
-{% endblock %}
-
 {% block additional_static_files %}
 	{{ block.super }}
 	{% addtoblock "css" %}
