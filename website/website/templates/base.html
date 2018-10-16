@@ -2,16 +2,26 @@
 <!doctype html>
 <html>
     <head>
-        <title>{% block title %}This is my new project home page{% endblock title %}</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>{% block title %}{% endblock title %}</title>
+        
         {% render_block "css" %}
         {% block main_static_files %}{% endblock %}
         {% block additional_static_files %}{% endblock %}
+
     </head>
     <body class="animsition">
         {% cms_toolbar %}
         {% block header %}{% endblock header %}
         {% block content %}{% endblock content %}
+
+        <!-- Back to top -->
+        <div id="back-to-top"></div>
+        <!-- Back to top -->
+
         {% render_block "js" %}
     </body>
 </html>
