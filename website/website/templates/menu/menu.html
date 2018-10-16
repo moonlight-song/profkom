@@ -1,12 +1,12 @@
 {% load menu_tags %}
 
-{% for child in children %}
-	<li class="child{% if child.selected %} selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}">
-		<a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a>
-		{% if child.children %}
-		<ul>
-			{% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
-		</ul>
-		{% endif %}
-	</li>
-{% endfor %}
+<ul class="main-nav nav navbar-nav">
+	{% for child in children %}
+		<li class="child{% if child.selected %} selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}{% if child.children %} dropdown{% endif %}">
+			<a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}" class="{% if child.children %} dropbtn{% endif %}">{{ child.get_menu_title }}</a>
+			{% if child.children %}
+				{% show_menu from_level to_level extra_inactive extra_active "menu/sub_menu.html" "" "" child %}
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>

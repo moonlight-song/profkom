@@ -4,9 +4,12 @@
 {% block main_static_files %}
 	{{ block.super }}
 	{% addtoblock "css" %}
+
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7CLato:300,400" rel="stylesheet"> 
 		
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/bootstrap.min.css' %}" />		
 
 		<!-- Owl Carousel -->
 		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/owl.carousel.css' %}" />
@@ -15,8 +18,6 @@
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="{% static 'magnews/css/font-awesome.min.css' %}" />
 
-		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/bootstrap.min.css' %}" />		
 		
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/style.css' %}" />
@@ -37,48 +38,14 @@
 
 {% block header %}
 	<header id="header">
-				
-		<!-- Center Header -->
-		<!--
-		<div id="center-header">
-			<div class="container">
-				<div class="header-logo">
-					<a href="#" class="logo"><img src="./img/logo.png" alt=""></a>
-				</div>
-				<div class="header-ads">
-					<img class="center-block" src="./img/ad-2.jpg" alt=""> 
-				</div>
-			</div>
-		</div>
-		-->
-		<!-- /Center Header -->
-		
 		<!-- Nav Header -->
-		<div id="nav-header">
+		<div id="nav-header" class="navbar-fixed-top fixed">
 			<div class="container">
 				<nav id="main-nav">
-					<div class="nav-logo">
-						<a href="#" class="logo"><img src="./img/logo-alt.png" alt=""></a>
-					</div>
-					<ul class="main-nav nav navbar-nav">
-		                {% show_menu 0 100 100 100 %}
-		            </ul>
+					{% show_menu 0 100 100 100 %}
 				</nav>
 				
 				<div class="button-nav">
-					<button class="login-btn">
-					    {% if user.is_authenticated %}
-				            <a href="{% url 'accounts:logout' %}">
-				                {% trans 'Log out' %} {% firstof user.get_short_name user.get_username %}
-				            </a>
-					    {% else %}
-				            <a href="{% url 'accounts:login' %}">
-				                {% trans 'Log in' %} {% firstof user.get_short_name user.get_username %}
-				            </a>
-					    {% endif %}
-
-					</button>
-					<button class="search-collapse-btn"><i class="fa fa-search"></i></button>
 					<button class="nav-collapse-btn"><i class="fa fa-bars"></i></button>
 				</div>
 			</div>

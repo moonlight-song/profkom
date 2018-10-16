@@ -1,6 +1,6 @@
 (function($) {
 	"use strict"
-	
+	/*
 	$(window).on('scroll', function() {
 		// Fixed Nav
 		var wScroll = $(this).scrollTop();
@@ -9,7 +9,7 @@
 		// Back to top appear
 		wScroll > 740 ? $('#back-to-top').addClass('active') : $('#back-to-top').removeClass('active')
 	});
-	
+	*/
 	// Back to top
 	$('#back-to-top').on("click", function(){
 		$('body,html').animate({
@@ -27,7 +27,7 @@
 		$(this).toggleClass('active');
 		$('.search-form').toggleClass('search-collapse');
 	});
-
+	
 	// Owl Carousel
 	$('#owl-carousel-1').owlCarousel({
 		loop:true,
