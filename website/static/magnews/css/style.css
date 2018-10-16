@@ -232,27 +232,27 @@ textarea.input {
 	z-index:99;
 }
 
-.main-nav li {
+.main-nav > li {
 	border-left:1px solid #222;
 }
 
-.main-nav li:last-child {
+.main-nav > li:last-child {
 	border-right:1px solid #222;
 }
 
 .login-btn a,
-.main-nav li a {
+.main-nav > li > a {
 	padding: 25px 15px;
 	color: #FFF;
 	text-transform: uppercase;
 }
 
-.main-nav li.active a {
+.main-nav > li.active a {
 	background-color:#EF233C !important;
 }
 
 .login-btn a:hover, .login-btn a:focus,
-.main-nav li a:hover, .main-nav li a:focus {
+.main-nav > li > a:hover, .main-nav > li > a:focus {
 	background-color:#222;
 }
 
@@ -1369,3 +1369,41 @@ textarea.input {
 
 
 /* CUSTOM */
+
+.animsition {
+    margin-top: 70px;
+}
+
+.animsition img {
+	max-width:100%;
+}
+
+/* Dropdown Menu */
+
+.cms-ready #nav-header.fixed {
+    top: 46px;
+}
+
+/* Navbar container */
+
+.dropdown .dropdown-menu {
+    background: #ebebeb;
+    border-radius: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+	display: block;
+}
+
+.dropdown-menu > li {
+    border: none;
+}
+
+.dropdown-menu > li > a {
+    padding: 10px 15px;
+    color: black;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #d6d6d6;
+}
