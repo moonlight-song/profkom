@@ -10,6 +10,8 @@
 		wScroll > 740 ? $('#back-to-top').addClass('active') : $('#back-to-top').removeClass('active')
 	});
 	*/
+
+
 	// Back to top
 	$('#back-to-top').on("click", function(){
 		$('body,html').animate({
@@ -84,6 +86,9 @@
 		dots : true,
 		nav: false,
 		autoplay : true,
+	});
+
+	$(".mobile_menu").slideMobileMenu({
 	});
 
 })(jQuery);
