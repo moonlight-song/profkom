@@ -160,6 +160,3 @@ body.mmactive {
   background: url(../images/next.png) no-repeat scroll center center / 45% auto;
   cursor: pointer;
 }
-.sm_menu_outer {
-  overflow: hidden;
-}
