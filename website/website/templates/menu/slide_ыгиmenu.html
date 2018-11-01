@@ -1,0 +1,13 @@
+{% load menu_tags %}
+
+<ul class="{% if level == 0 %}mobile_menu{% else %}submenu{% endif %}">
+	{% for child in children %}
+		<li>
+			<a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a>
+			{% if child.children %}
+				<span class="forward"></span>
+				{% show_menu from_level to_level extra_inactive extra_active "menu/slide_menu.html" "" "" child %}
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>

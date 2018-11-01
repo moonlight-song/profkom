@@ -27,7 +27,7 @@ urlpatterns += (
 
     url(r'^admin/', include(admin.site.urls)),  
     url(r'^', include('cms.urls')),
-    url(r'^vk_news/', include('news.urls')),
+    #url(r'^vk_news/', include('news.urls')),
 )
 
 #handler500 = news.views.error_500

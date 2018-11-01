@@ -17,7 +17,9 @@
 		
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="{% static 'magnews/css/font-awesome.min.css' %}" />
-
+		
+		<!-- Slider Mobile Menu -->
+		<link rel="stylesheet" href="{% static 'mobile_menu/styles/jquery-simple-mobilemenu.css' %}" />
 		
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{% static 'magnews/css/style.css' %}" />
@@ -28,7 +30,11 @@
 		<script src="{% static 'magnews/js/jquery.min.js' %}"></script>
 		<script src="{% static 'magnews/js/bootstrap.min.js' %}"></script>
 		<script src="{% static 'magnews/js/owl.carousel.min.js' %}"></script>
+
+		<script src="{% static 'mobile_menu/jquery-simple-mobilemenu.js' %}"></script>		
+
 		<script src="{% static 'magnews/js/main.js' %}"></script>
+
 	{% endaddtoblock %}	
 {% endblock %}
 
@@ -44,13 +50,13 @@
 				<nav id="main-nav">
 					{% show_menu 0 100 100 100 %}
 				</nav>
-				
-				<div class="button-nav">
-					<button class="nav-collapse-btn"><i class="fa fa-bars"></i></button>
-				</div>
 			</div>
 		</div>
 		<!-- /Nav Header -->
+		
+		<!-- Slider left menu -->
+		{% show_menu 0 100 100 100 "menu/slide_menu.html" %}
+		<!-- /Slider left menu -->
 	</header>
 {% endblock header %}
 

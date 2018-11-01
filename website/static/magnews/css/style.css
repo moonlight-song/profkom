@@ -1407,3 +1407,14 @@ textarea.input {
 .dropdown-menu > li > a:hover {
     background-color: #d6d6d6;
 }
+
+
+@media (max-width: 1024px) {
+  .main-nav {
+    display: none;
+  }
+}
+
+#header #nav-header {
+	height: 70px;
+}
