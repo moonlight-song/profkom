@@ -33,35 +33,6 @@
                 {% endfor %}
             </div>
             <div class="col-md-4">
-                <!-- subscribe widget -->
-                <!--
-                <div class="widget subscribe-widget">
-                    <div class="widget-title">
-                        <h2 class="title">Subscribe to Newslatter</h2>
-                    </div>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="input-btn">Subscribe</button>
-                    </form>
-                </div>
-                -->
-                <!-- /subscribe widget -->
-                
-                <!-- article widget -->
-                {% if featured_articles %}
-                    <div class="widget">
-                        <div class="section-title">
-                            <h2 class="title">Важные статьи</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        {% for article in featured_articles %}
-                            {% include "aldryn_newsblog/includes/article_sidebar.html" %}
-                        {% endfor %}
-                    </div>
-
-                {% endif %}
-
                 <!-- social widget -->
                 <div class="widget social-widget">
                     <div class="section-title">
