@@ -10,6 +10,8 @@ APPLICATION_TYPES = {
 	'apos_single' : 'Единоразовый АПОС'
 }
 
+APPLICATION_TYPES_LIST = ['meals', 'profilaktory', 'apos_regular', 'apos_single']
+
 class Period (models.Model) :
 
 	#APPLICATION_TYPE_CHOICES = tuple([(item, item) for item in APPLICATION_TYPES])
@@ -18,7 +20,7 @@ class Period (models.Model) :
 
 	application_type = models.CharField(
 		max_length = 30,
-		choices = tuple([(item, APPLICATION_TYPES[item]) for item in APPLICATION_TYPES])
+		choices = tuple([(item, APPLICATION_TYPES[item]) for item in APPLICATION_TYPES_LIST])
 	)
 
 	application_start = models.DateField()
