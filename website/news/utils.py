@@ -48,9 +48,9 @@ class VkPostsImporter(object):
 		
 		if self.valid_data_from_vk :
 
-			missing_posts = self.check_missing_posts()
-			if missing_posts :
-				for post in missing_posts : self.download_post (post)
+			missing_posts_tuples = self.check_missing_posts()
+			if missing_posts_tuples :
+				for post_tuple in missing_posts_tuples : self.download_post (post_tuple)
 
 		else :
 			print ('Invalid data from vk')
@@ -68,9 +68,9 @@ class VkPostsImporter(object):
 			vk_posts = VkPost.objects.all()
 			for post in vk_posts : post.delete()
 
-			missing_posts = self.check_missing_posts()
-			if missing_posts :
-				for post in missing_posts : self.download_post (post)
+			missing_posts_tuples = self.check_missing_posts()
+			if missing_posts_tuples :
+				for post_tuple in missing_posts_tuples : self.download_post (post_tuple)
 
 		else :
 			print ('Invalid data from vk')
@@ -84,16 +84,54 @@ class VkPostsImporter(object):
 		#print ("Loaded_posts_ids : {}".format(loaded_posts_ids))
 
 		for post in posts :
-			#return HttpResponse (len(post['copy_history']) != 0)
-			if post['id'] in loaded_posts_ids : continue # post wit this id is already loaded
-			#print ("Post id {} is to be loaded".format(post['id']))
+			if post['id'] in loaded_posts_ids : continue # post with this id is already loaded
 			if 'copy_history' in post : continue # it's a repost from other public page, skip it
-			posts_to_load.append(post)
+			#print ("Post id {} is to be loaded".format(post['id']))
+			
+			post_photo_key = self.get_post_photo_key(post)
+			if post_photo_key: 
+				posts_to_load.append((post, post_photo_key))
+			else:
+				continue
 
 		return posts_to_load
 
 
-	def download_post(self, post):
+	def get_post_photo_key(self, post):
+		"""
+		Returns index of photo in json in case the good one was found 
+		and False otherwise
+		"""
+		if 'photo' not in post['attachments'][0]: return False
+			
+		filtered = list(filter(lambda x: "photo_" in x, post['attachments'][0]['photo']))
+		if len(filtered) == 0 : return False
+
+		photo_size = max([int(item[6:]) for item in filtered])
+		return "photo_{}".format(photo_size) if photo_size >= 360 else False
+		"""
+		attachment = post['attachments'][0]
+		photo_key = ""
+		photo_size = 0
+
+		for key in attachment['photo'] : 
+			if 'photo_' in key : 
+				current_photo_size = int(key[6:])
+				if current_photo_size > photo_size : 
+					photo_size = current_photo_size
+					photo_key = key
+
+		if photo_key != "" and int(photo_key) > 360 :
+			return "photo_" + photo_key
+		else:
+			return False
+		"""
+		
+
+	def download_post(self, post_tuple):
+
+		post = post_tuple[0]
+		photo_key = post_tuple[1]
 
 		translation.activate('ru')
 		print ("Post {} is being downloaded".format(post['id']))
@@ -102,19 +140,8 @@ class VkPostsImporter(object):
 
 		try :
 			attachment = post['attachments'][0]
-			photo_key = ""
-			photo_size = 0
-			for key in attachment['photo'] : 
-				if 'photo_' in key : 
-					current_photo_size = int(key[6:])
-					if current_photo_size > photo_size : photo_key = key
 
 			pic_url = attachment['photo'][photo_key]
-
-			# Check whether it is a picture
-			header = requests.head(pic_url, allow_redirects=True)
-			if 'image' not in header.headers.get('content-type').lower():
-				raise Exception()
 
 			pic_response = requests.get(pic_url, allow_redirects=True)
 			url_end_index = pic_url.find('.com')
