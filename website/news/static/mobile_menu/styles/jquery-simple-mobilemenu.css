@@ -137,7 +137,7 @@ body.mmactive {
 /*@media (min-width: 0px) and (max-width: 767px) {}
 @media (min-width: 768px) and (max-width: 991px) {}
 @media (min-width: 992px) and (max-width: 1024px) {}*/
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   #sm_menu_ham,
   .sm_menu_outer {
     display: none;

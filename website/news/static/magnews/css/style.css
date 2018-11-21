@@ -320,7 +320,7 @@ textarea.input {
 	}
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
 	#header #top-header {
 		text-align:center;
 	}
@@ -391,10 +391,13 @@ textarea.input {
 	}
 	
 	.main-nav {
+		display: none;
+		/*
 		margin:0px;
 		max-height:400px;
 		overflow-x:hidden;
 		overflow-y:scroll;
+		*/
 	}
 }
 
@@ -1408,12 +1411,6 @@ textarea.input {
     background-color: #d6d6d6;
 }
 
-
-@media (max-width: 1024px) {
-  .main-nav {
-    display: none;
-  }
-}
 
 #header #nav-header {
 	height: 70px;

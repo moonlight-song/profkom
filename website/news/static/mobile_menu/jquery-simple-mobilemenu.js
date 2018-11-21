@@ -41,7 +41,6 @@
                 disBack = $("<li/>",{ 
                               "class" : "back",
                               "html"  : "<a href='#'>"+disfA.text()+"</a>" })
-            console.log(disfA.html());
             disPar.addClass("hasChild");
             disBack.prependTo(dis);
           });
