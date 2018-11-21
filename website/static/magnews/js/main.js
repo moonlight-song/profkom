@@ -19,11 +19,6 @@
         }, 500);
 	});
 	
-	// Mobile Toggle Btn
-	$('#nav-header .nav-collapse-btn').on('click',function(){
-		$('#main-nav').toggleClass('nav-collapse');
-	});
-	
 	// Search Toggle Btn
 	$('#nav-header .search-collapse-btn').on('click',function(){
 		$(this).toggleClass('active');
