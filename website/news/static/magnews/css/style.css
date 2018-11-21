@@ -82,6 +82,16 @@ ul,ol{
     list-style: none
 }
 
+.cms-plugin ul li {
+	list-style-type: disc;
+}
+
+.cms-plugin ol li {
+	list-style-type: decimal;
+}
+
+
+
 /*----------------------------*\
 	input
 \*----------------------------*/
